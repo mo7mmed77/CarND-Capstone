@@ -110,7 +110,11 @@ class WaypointUpdater(object):
             p.twist.twist.linear.x = min(vel, wp.twist.twist.linear.x)
             temp.append(p)
 
+<<<<<<< HEAD
         self.decelerate_count += 1
+=======
+         self.decelerate_count += 1
+>>>>>>> a2b9c4ef6693f40611499041e3ce4bc50aec78a2
         if (self.decelerate_count % LOGGING_THROTTLE_FACTOR) == 0:
             size = len(waypoints) - 1
             vel_start = temp[0].twist.twist.linear.x
