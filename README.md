@@ -1,8 +1,24 @@
 ## Full integration of self driving car system in ROS
+### Overview
 The aim of this project is to integrate and simulate different functionality of the self driving car algrothim in Robatics Operating System (ROS). The self driving car system takes the following configuration:- 
 
+![Alt text](imgs/final-project-ros-graph-v2.png?raw=true "Overview")
+
+As it can be seen above the system is composed of saveral subsystems. Perception, planning and control are the main components that represent the self driving car algorthim. 
+
+### Udacity Simulator 
+A simulator is needed to interface with the above system as it shown above. A link of the simulator can be found [here]https://github.com/udacity/CarND-Capstone/releases
 
 
+### Perception 
+This subsystem is composed of obstacle detection and traffic light detection. The traffic light detection can be obtained from the simulator, however, another method would be to implement traffic light classification algorithm. 
+
+
+### Planning  
+With current pose given from the simulator, the planner will compare that to the loaded waypoints and generate base waypoints to the waypoint updater. The waypoint updater then will send final wapoints to the control to be followed. Moreover, traffic light and obstacle information are taken from the preception node to ensure that the car will not run a red light or crash into an obstacle. 
+
+### Control 
+One of the main tasks of this node is transforming the commanded waypoints from waypoint updated to brake, thrttole and steering commands. This is also can be using a PID controller. This is done through the Drive by wire (DBW) node. 
 
 ## Installations
 
