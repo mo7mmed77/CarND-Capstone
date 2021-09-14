@@ -11,7 +11,7 @@ A simulator is needed to interface with the above system as it shown above. A li
 
 
 ### Perception 
-This subsystem is composed of obstacle detection and traffic light detection. The traffic light detection can be obtained from the simulator, however, another method would be to implement traffic light classification algorithm. 
+This subsystem is composed of obstacle detection and traffic light detection. The traffic light detection can be obtained from the simulator, however, another method would be to implement traffic light classification algorithm. The code for this can be found in [tl_detector.py](/ros/src/tl_detection/tl_detector.py) 
 
 
 ### Planning  
