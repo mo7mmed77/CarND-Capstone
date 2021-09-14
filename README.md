@@ -1,3 +1,6 @@
+## Full integration of self driving car system in ROS
+The aim of this project is to integrate and simulate different functionality of the self driving car algrothim in Robatics Operating System (ROS). The self driving car system takes the following configuration:- 
+
 
 
 
