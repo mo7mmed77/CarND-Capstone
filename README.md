@@ -1,13 +1,10 @@
 ## Full integration of self driving car system in ROS
 ### Overview
-The aim of this project is to integrate and simulate different functionality of the self driving car algrothim in Robatics Operating System (ROS). The self driving car system takes the following configuration:- 
+The aim of this project is to integrate and simulate different functionality of the self driving car algrothim in Robotics Operating System (ROS). The self driving car system takes the following configuration:- 
 
 ![Alt text](imgs/final-project-ros-graph-v2.png?raw=true "Overview")
 
-As it can be seen above the system is composed of saveral subsystems. Perception, planning and control are the main components that represent the self driving car algorthim. 
-
-### Udacity Simulator 
-A simulator is needed to interface with the above system as it shown above. A link of the simulator can be found [here]https://github.com/udacity/CarND-Capstone/releases
+As it can be seen above the system is composed of saveral subsystems. Perception, planning and control are the main components that represent the self driving car algorthim. A unity simulator is used to simulate the car behavior as well as making use of a virtual environment, it is needed to interface with the above system as it shown above. A link of the simulator can be found [here]https://github.com/udacity/CarND-Capstone/releases
 
 
 ### Perception 
