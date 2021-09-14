@@ -11,13 +11,25 @@ A simulator is needed to interface with the above system as it shown above. A li
 
 
 ### Perception 
-This subsystem is composed of obstacle detection and traffic light detection. The traffic light detection can be obtained from the simulator, however, another method would be to implement traffic light classification algorithm. The code for this can be found in [tl_detector.py](ros/src/tl_detection/tl_detector.py) 
+
+  [tl_detector.py](/ros/src/tl_detector/tl_detector.py)  
+  
+  
+This subsystem is composed of obstacle detection and traffic light detection. The traffic light detection can be obtained from the simulator, however, another method would be to implement traffic light classification algorithm.
+
+
 
 
 ### Planning  
+
+[wayppoint_updater.py](/ros/src/waypoint_updater/waypoint_updater.py)
+
 With current pose given from the simulator, the planner will compare that to the loaded waypoints and generate base waypoints to the waypoint updater. The waypoint updater then will send final wapoints to the control to be followed. Moreover, traffic light and obstacle information are taken from the preception node to ensure that the car will not run a red light or crash into an obstacle. 
 
 ### Control 
+
+ [dbw_node.py](/ros/src/twist_controller/dbw_node.py) 
+ 
 One of the main tasks of this node is transforming the commanded waypoints from waypoint updated to brake, thrttole and steering commands. This is also can be using a PID controller. This is done through the Drive by wire (DBW) node. 
 
 ## Installations
