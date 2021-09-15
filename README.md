@@ -53,6 +53,13 @@ One of the main tasks of this node is transforming the commanded waypoints from 
 The output of this node is the three input controls to the car under the topics: `/vehicle/throttle_cmd`, `/vehicle/brake_cmd`, and `/vehicle/steering_cmd` topics.
 
 
+### Running the full ROS system 
+
+I have created a bash script (Run.bash)  that deletes the build folder (if exists) then catkin_make the ros scripts, then sources the `/devel/setup.sh`, then finally runs the `roslaunch /launch/styx.launch`
+
+`rm -r build/ ; catkin_make; source devel/setup.sh ; roslaunch launch/styx.launch`
+
+This bash file needs to be tranformed into excutable before running it `chmod +x ./Run.bash` . 
 
 ## Installations
 
