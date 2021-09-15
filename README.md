@@ -41,8 +41,6 @@ The control subsystem under (/ros/src/twist_controller) can be mainly decribed b
 6. the yaw controller script: gives out the steering command to the twist controller script.  
 
 
-#### Waypoint Follower
-
 #### Drive By Wire 
 
  [dbw_node.py](/ros/src/twist_controller/dbw_node.py) 
