@@ -11,23 +11,50 @@ As it can be seen above the system is composed of saveral subsystems. Perception
 
   [tl_detector.py](/ros/src/tl_detector/tl_detector.py)  
   
+  <img src="imgs/tl-detector-ros-graph.png" width="700" height="180" />
   
-This subsystem is composed of obstacle detection and traffic light detection. The traffic light detection can be obtained from the simulator, however, another method would be to implement traffic light classification algorithm.
-
+This subsystem is composed of obstacle detection and traffic light detection. The traffic light detection can be obtained from the simulator, however, another method would be to implement traffic light classification algorithm. The input to this node is `/image_color`, `/current_pose` of the car, and the `/base_waypoints`. The base waypoints can be thought as path planning points on the road for the car to follow, while the current pose represent the position of the car at that instance. These are all topics that this node subscribes to, in order to process this information and publish to the  `/traffic_waypoint` topic. 
 
 
 
 ### Planning  
 
+#### Waypoint Loader
+A script which loads static waypoint data and publishes to `/base_waypoints`.
+
+#### Waypoint Updater
 [wayppoint_updater.py](/ros/src/waypoint_updater/waypoint_updater.py)
 
-With current pose given from the simulator, the planner will compare that to the loaded waypoints and generate base waypoints to the waypoint updater. The waypoint updater then will send final wapoints to the control to be followed. Moreover, traffic light and obstacle information are taken from the preception node to ensure that the car will not run a red light or crash into an obstacle. 
+<img src="imgs/waypoint-updater-ros-graph.png" width="700" height="180" />
+
+With current pose given from the simulator, the planner will compare that to the loaded waypoints and generate base waypoints to the waypoint updater. The waypoint updater then will send final wapoints to the control to be followed. Moreover, traffic light and obstacle information are taken from the preception node to ensure that the car will not run a red light or crash into an obstacle. This node subscribes to  `/current_pose` ,`/base_waypoints` and `/traffic_waypoint` topics. Then it publishes the list of waypoints aheaad with the information of a velocity to follow (target velocity) to the `/final_waypoints` topic.
+
 
 ### Control 
 
+The control subsystem under (/ros/src/twist_controller) can be mainly decribed by the following python files:- 
+1. Waypoint follower script: subscribes to the `/final_waypoints` (from the waypoint updater) and publishes target linear and angular velocities in the `/twist_cmd` topic.
+2. The Drive by wire (DBW) script: defines the DBW object parameters , subscribes to the `/twist_cmd` topic and publishes the three control commands (throttle, steering and brake). 
+3. The Twist controller script: defines the controller object and  outputs the throttle, brake and steering commands.
+4. low pass filter script: Used to smooth the data coming into the controller.  
+5. PID controller script: Used to maintain a robust and stable control input into the car's used for throttle controller.
+6. the yaw controller script: gives out the steering command to the twist controller script.  
+
+
+#### Waypoint Follower
+
+#### Drive By Wire 
+
  [dbw_node.py](/ros/src/twist_controller/dbw_node.py) 
  
-One of the main tasks of this node is transforming the commanded waypoints from waypoint updated to brake, thrttole and steering commands. This is also can be using a PID controller. This is done through the Drive by wire (DBW) node. 
+ <img src="imgs/dbw-node-ros-graph.png" width="700" height="180" />
+
+
+One of the main tasks of this node is transforming the commanded waypoints from waypoint updated to brake, thrttole and steering commands. This node subscribes to `/current_velocity` topic and `/twist_cmd` topic. The difference between the current state of the car and the commanded state will then be transformed into throttle, brake and steering commands. Moreover, this node also subcribes to `/vehicle/dbw_enabled` topic to differentiate between manual mode or self driving mode.  
+
+The output of this node is the three input controls to the car under the topics: `/vehicle/throttle_cmd`, `/vehicle/brake_cmd`, and `/vehicle/steering_cmd` topics.
+
+
 
 ## Installations
 
